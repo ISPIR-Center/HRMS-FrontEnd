@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ValidationModal from '../../shared/ValidationModal'; // Import the Validation Modal
+import ValidationModal from '../../shared/admin/ValidationModal'; // Import the Validation Modal
 
 const dummyData = [
     {

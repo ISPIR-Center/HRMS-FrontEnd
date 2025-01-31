@@ -1,38 +1,42 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../../utils/axiosInstance';
 
-const LoginPage = ({ role }) => {  // Accept role as a prop
+const LoginPage = ({ role }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
+  // Function for handling the login process
   const handleLogin = async () => {
     setLoading(true);
-    setErrorMessage(''); // Clear any previous error messages
-    setSuccessMessage(''); // Clear any success messages
+    setErrorMessage('');
+    setSuccessMessage('');
 
     try {
-      const response = await axios.post('http://localhost:8000/login', {
-        email_address: email,  // Assuming your backend expects 'email_address' as the field
+      const response = await axiosInstance.post('/login', {
+        email_address: email,
         password,
       });
 
       if (response.data.success) {
         setSuccessMessage('Login successful');
-        
-        // Save token to localStorage
+
+        // Save the token to localStorage
         localStorage.setItem('auth_token', response.data.token);
-        
-        // Navigate based on the role (Admin or User)
-        if (role === 'admin') {
-          navigate('/admin/dashboard');  // Admin Dashboard
+
+        // Dynamically set role based on the backend response
+        const userRole = response.data.user.role;
+
+        // Navigate based on the user's role
+        if (userRole === 'admin') {
+          navigate('/admin/dashboard');
         } else {
-          navigate('/user/dashboard');  // User Dashboard
+          navigate('/user/dashboard');
         }
       } else {
         setErrorMessage(response.data.message || 'Login failed, try again.');
@@ -45,7 +49,6 @@ const LoginPage = ({ role }) => {  // Accept role as a prop
   };
 
   const handleForgotPassword = () => {
-    // Handle the forgot password action here
     console.log('Redirect to forgot password page or trigger modal');
   };
 

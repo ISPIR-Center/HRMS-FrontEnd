@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Spinner from "./Spinner";  // Import the Spinner component
-import CongratsMessage from "./CongratsMessage";  // Import the CongratsMessage component
+import Spinner from "../Spinner";  // Import the Spinner component
+import CongratsMessage from "../CongratsMessage";  // Import the CongratsMessage component
 
 const ValidationModal = ({ show, onClose, content }) => {
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,7 @@ const ValidationModal = ({ show, onClose, content }) => {
               </div>
               <div className="self-stretch justify-end items-start gap-2.5 flex">
                 <button onClick={onClose} className="w-[30px] h-[30px]">
-                  <img src="assets/icon/closebutton.svg" alt="" />
+                  <img src="/assets/icon/closebutton.svg" alt="" />
                 </button>
               </div>
             </div>
@@ -77,7 +77,7 @@ const ValidationModal = ({ show, onClose, content }) => {
               <div className="self-stretch text-[#00597a] text-sm font-normal">IPCR Attachment:</div>
               <div className="self-stretch px-2.5 bg-gradient-to-b from-white to-[#eef8ff] rounded-[10px] shadow-[0px_0px_5px_0px_rgba(0,0,0,0.25)] border border-[#00597a] justify-end items-center gap-2.5 inline-flex overflow-hidden">
                 <div className="w-[30px] h-[30px] justify-center items-center flex">
-                  <img className="w-[30px] h-[30px]" src="assets/img/XLS.png" alt="attachment icon" />
+                  <img className="w-[30px] h-[30px]" src="/assets/img/XLS.png" alt="attachment icon" />
                 </div>
                 <div className="p-2.5 rounded-[10px] justify-start items-start gap-2.5 flex overflow-hidden">
                   <div className="self-stretch justify-start items-center gap-2.5 flex">

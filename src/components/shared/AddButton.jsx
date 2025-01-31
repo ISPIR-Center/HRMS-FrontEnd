@@ -8,7 +8,7 @@ const AddButton = ({ onAddClick }) => {
     >
       <div className="w-[25px] h-[25px]">
         <img
-          src="assets/icon/symbol-add.svg"
+          src="/assets/icon/symbol-add.svg"
           alt="Add Icon"
           className="w-full h-full object-contain"
         />

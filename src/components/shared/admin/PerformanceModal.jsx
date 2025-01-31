@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Spinner from './Spinner';
-import CongratsMessage from './CongratsMessage';
+import Spinner from '../Spinner';
+import CongratsMessage from '../CongratsMessage';
 
 const PerformanceModal = ({ closeModal }) => {
   const [showSecondModal, setShowSecondModal] = useState(false);
@@ -41,7 +41,7 @@ const PerformanceModal = ({ closeModal }) => {
                 Submit IPCR
               </div>
               <button className="w-[30px] h-[30px]" onClick={closeModal}>
-                <img src="assets/icon/closebutton.svg" alt="Close Icon" />
+                <img src="/assets/icon/closebutton.svg" alt="Close Icon" />
               </button>
             </div>
             <div class="self-stretch h-[66px] flex-col justify-center items-center gap-[5px] flex">
@@ -134,7 +134,7 @@ const PerformanceModal = ({ closeModal }) => {
                 className="w-[30px] h-[30px] relative overflow-hidden"
                 onClick={closeModal}
               >
-                <img src="assets/icon/closebutton.svg" alt="Close Icon" />
+                <img src="/assets/icon/closebutton.svg" alt="Close Icon" />
               </button>
             </div>
 

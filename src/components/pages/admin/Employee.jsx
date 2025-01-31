@@ -2,24 +2,22 @@ import React, { useState } from 'react';
 import Layout from '../../layouts/admin/Layout';
 import EmployeeTable from '../../layouts/admin/EmployeeTable';
 import AddButton from '../../shared/AddButton';  // Import the AddButton component
-import Modal from '../../shared/Modal';  // Import the first Modal component
-import SecondModal from '../../shared/SecondModal';  // Import the second Modal component
+import CreateEmployeeModal from '../../shared/admin/CreateEmployeeModal'; // Import the modal component
 
 const Employee = () => {
-  // State for first modal visibility
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);  // State for controlling modal visibility
 
-  // State for second modal visibility
-  const [isSecondModalOpen, setSecondModalOpen] = useState(false);
-
-  // Functions to open/close modals
-  const openModal = () => setModalOpen(true); // Open first modal
-  const closeModal = () => setModalOpen(false); // Close first modal
-  const openSecondModal = () => {
-    setModalOpen(false);  // Close the first modal
-    setSecondModalOpen(true); // Open the second modal
+  // Function to open the modal
+  const openModal = () => {
+    console.log('Modal Opened'); // Debugging line
+    setIsModalOpen(true);
   };
-  const closeSecondModal = () => setSecondModalOpen(false); // Close the second modal
+
+  // Function to close the modal
+  const closeModal = () => {
+    console.log('Modal Closed'); // Debugging line
+    setIsModalOpen(false);
+  };
 
   return (
     <Layout title="Employee">
@@ -33,7 +31,7 @@ const Employee = () => {
             className="text-[#0a3c5d] text-sm font-light bg-transparent grow outline-none"
           />
           <div className="w-6 h-6">
-            <img src="assets/icon/search.svg" alt="Search Icon" className="w-full h-full object-contain" />
+            <img src="/assets/icon/search.svg" alt="Search Icon" className="w-full h-full object-contain" />
           </div>
         </div>
 
@@ -48,23 +46,20 @@ const Employee = () => {
           <div className="w-[200px] h-[45px] pl-5 pr-2.5 bg-[#f0f2f5] rounded-[10px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] flex justify-between items-center">
             <div className="text-[#00597a] text-base font-normal">Non-Academic</div>
             <div className="w-6 h-6">
-              <img src="assets/icon/tabler_chevron-up.svg" alt="Chevron Icon" className="w-full h-full object-contain" />
+              <img src="/assets/icon/tabler_chevron-up.svg" alt="Chevron Icon" className="w-full h-full object-contain" />
             </div>
           </div>
-
-          {/* Add Button: Trigger Modal */}
-          <AddButton onAddClick={openModal} /> {/* Trigger first modal */}
+          
+          {/* Pass the openModal function to AddButton as onAddClick */}
+          <AddButton onAddClick={openModal} />
         </div>
       </div>
 
       {/* Employee Table */}
       <EmployeeTable />
 
-      {/* First Modal */}
-      <Modal isOpen={isModalOpen} onClose={closeModal} onNext={openSecondModal} /> {/* Pass `onNext` function to trigger second modal */}
-
-      {/* Second Modal */}
-      <SecondModal isOpen={isSecondModalOpen} onClose={closeSecondModal} /> {/* Second modal */}
+      {/* CreateEmployeeModal with isOpen and closeModal passed as props */}
+      <CreateEmployeeModal isOpen={isModalOpen} closeModal={closeModal} />
     </Layout>
   );
 };

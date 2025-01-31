@@ -57,7 +57,7 @@ const Sidebar = () => {
         
         {/* Reusing SidebarItem for Dashboard */}
         <SidebarItem 
-          to="/admin/dashboard" 
+          to="/user/dashboard" 
           imageSrc="/assets/icon/dashboard.svg" // Default black image
           imageHoverSrc="/assets/icon/dashboardwhite.svg" // White image on hover
           imageActiveSrc="/assets/icon/dashboardwhite.svg" // Active image (white)
@@ -66,7 +66,7 @@ const Sidebar = () => {
 
         {/* Reusing SidebarItem for Employee */}
         <SidebarItem 
-          to="/admin/employee" 
+          to="/user/employee" 
           imageSrc="/assets/icon/user.svg" // Default black image
           imageHoverSrc="/assets/icon/userwhite.svg" // White image on hover
           imageActiveSrc="/assets/icon/userwhite.svg" // Active image (white)
@@ -75,7 +75,7 @@ const Sidebar = () => {
 
         {/* Performance Review Item */}
         <SidebarItem 
-          to="/admin/performance" 
+          to="/user/performance" 
           imageSrc="/assets/icon/performancereview.svg" // Default black image
           imageHoverSrc="/assets/icon/performance-active.svg" // White image on hover
           imageActiveSrc="/assets/icon/performance-active.svg" // Active image (white)
@@ -130,7 +130,7 @@ const Sidebar = () => {
 
         {/* Payroll Item */}
         <SidebarItem 
-          to="/admin/payroll" 
+          to="/user/payroll" 
           imageSrc="/assets/icon/payroll.svg" // Default black image
           imageHoverSrc="/assets/icon/payrollwhite.svg" // White image on hover
           imageActiveSrc="/assets/icon/payrollwhite.svg" // Active image
@@ -139,7 +139,7 @@ const Sidebar = () => {
 
         {/* Reports Item */}
         <SidebarItem 
-          to="/admin/reports" 
+          to="/user/reports" 
           imageSrc="/assets/icon/reports.svg" // Default black image
           imageHoverSrc="/assets/icon/reportwhite.svg" // White image on hover
           imageActiveSrc="/assets/icon/reportwhite.svg" // Active image (white)
@@ -148,7 +148,7 @@ const Sidebar = () => {
 
         {/* Settings Item */}
         <SidebarItem 
-          to="/admin/settings" 
+          to="/user/settings" 
           imageSrc="/assets/icon/settings.svg" // Default black image
           imageHoverSrc="/assets/icon/settingswhite.svg" // White image on hover
           imageActiveSrc="/assets/icon/settingswhite.svg" // Active image

@@ -20,10 +20,10 @@ const EmployeeTable = () => {
                     <div className="flex-1 text-[#0a3c5d] text-base font-normal text-left">DIO</div>
                     <div className="flex-[0.5] flex justify-center items-center gap-2.5">
                         <button className="w-[25px] h-[25px] relative overflow-hidden">
-                        <img src="assets/icon/edit.svg" alt="Edit" />
+                        <img src="/assets/icon/edit.svg" alt="Edit" />
                         </button>
                         <button className="w-[25px] h-[25px] relative overflow-hidden">
-                        <img src="assets/icon/delete.svg" alt="Delete" />
+                        <img src="/assets/icon/delete.svg" alt="Delete" />
                         </button>
                     </div>
                 </div>
@@ -34,10 +34,10 @@ const EmployeeTable = () => {
                     <div className="flex-1 text-[#0a3c5d] text-base font-normal text-left">DIO</div>
                     <div className="flex-[0.5] flex justify-center items-center gap-2.5">
                         <button className="w-[25px] h-[25px] relative overflow-hidden">
-                        <img src="assets/icon/edit.svg" alt="Edit" />
+                        <img src="/assets/icon/edit.svg" alt="Edit" />
                         </button>
                         <button className="w-[25px] h-[25px] relative overflow-hidden">
-                        <img src="assets/icon/delete.svg" alt="Delete" />
+                        <img src="/assets/icon/delete.svg" alt="Delete" />
                         </button>
                     </div>
                 </div>

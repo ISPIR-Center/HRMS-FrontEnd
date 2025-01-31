@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../../layouts/admin/Layout';
 import PerformanceTable from '../../layouts/admin/PerformanceTable';
-import PerformanceModal from '../../shared/PerformanceModal';
+import PerformanceModal from '../../shared/admin/PerformanceModal';
 
 const Performance = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -26,7 +26,7 @@ const Performance = () => {
             className="text-[#0a3c5d] text-sm font-light bg-transparent grow outline-none"
           />
           <div className="w-6 h-6">
-            <img src="assets/icon/search.svg" alt="Search Icon" className="w-full h-full object-contain" />
+            <img src="/assets/icon/search.svg" alt="Search Icon" className="w-full h-full object-contain" />
           </div>
         </div>
 
@@ -43,7 +43,7 @@ const Performance = () => {
           <div className="w-[200px] h-[45px] pl-5 pr-2.5 bg-[#f0f2f5] rounded-[10px] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)] flex justify-between items-center">
             <div className="text-[#00597a] text-base font-normal">Filter</div>
             <div className="w-6 h-6">
-              <img src="assets/icon/ion_filter.svg" alt="Chevron Icon" className="w-full h-full object-contain" />
+              <img src="/assets/icon/ion_filter.svg" alt="Chevron Icon" className="w-full h-full object-contain" />
             </div>
           </div>
 
@@ -54,7 +54,7 @@ const Performance = () => {
               className="flex items-center px-6 py-[10px] bg-[#00597a] rounded-[10px] shadow-md gap-[6px]"
             >
               <div className="w-5 h-5">
-                <img src="assets/icon/submit.svg" alt="Submit Icon" className="w-full h-full object-contain" />
+                <img src="/assets/icon/submit.svg" alt="Submit Icon" className="w-full h-full object-contain" />
               </div>
               <span className="text-white text-base font-normal">
                 Submit
