@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import axios from 'axios';
 import axiosInstance from '../../../utils/axiosInstance';
 
 const CreateEmployeeModal = ({ isOpen, closeModal }) => {
-  // Always call useState hooks at the top, without conditions
   const [formData, setFormData] = useState({
     employment_type_id: '',
     classification_id: '',
     office_id: '',
-    employee_no: '',  // Added employee_no field
+    employee_no: '',
     first_name: '',
     middle_name: '',
     last_name: '',
@@ -20,12 +19,41 @@ const CreateEmployeeModal = ({ isOpen, closeModal }) => {
     google_scholar_link: '',
     designation: ''
   });
-  
+
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const [offices, setOffices] = useState([]); // State to store office data
+  const [employmentTypes, setEmploymentTypes] = useState([]); // State to store employment type data
 
-  // Make sure you return null early for non-rendered cases
-  if (!isOpen) return null; // Don't conditionally call the hook inside render
+  useEffect(() => {
+    // Fetch office and employment types data when the modal is opened
+    if (isOpen) {
+      // Fetch offices
+      axiosInstance.get('/offices/dropdown')
+        .then((response) => {
+          if (response.data.success) {
+            setOffices(response.data.data);
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching offices:', error);
+        });
+
+      // Fetch employment types
+      axiosInstance.get('/employment-type/dropdown') // Adjust the URL accordingly
+        .then((response) => {
+          if (response.data.success) {
+            setEmploymentTypes(response.data.data);
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching employment types:', error);
+        });
+    }
+  }, [isOpen]); // Re-fetch when the modal is opened
+
+  // Don't render the modal if it's not open
+  if (!isOpen) return null;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -37,26 +65,25 @@ const CreateEmployeeModal = ({ isOpen, closeModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axiosInstance.post('/profile/create', formData);
-  
+
       if (response.data.success) {
         setSuccessMessage('Employee created successfully!');
         setErrorMessage('');
-        closeModal();  // Close the modal upon success
+        closeModal(); // Close the modal upon success
       }
     } catch (error) {
       if (error.response) {
-        const validationErrors = error.response.data.errors || {}; // Extract errors from the response
-        const formattedErrors = Object.values(validationErrors).flat(); // Flatten the error messages into an array
-        setErrorMessage(formattedErrors); // Set the formatted errors in state
+        const validationErrors = error.response.data.errors || {};
+        const formattedErrors = Object.values(validationErrors).flat();
+        setErrorMessage(formattedErrors);
         setSuccessMessage('');
       }
     }
   };
-  
-  
+
   return (
     <div
       className="fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center z-50 font-poppins"
@@ -87,21 +114,23 @@ const CreateEmployeeModal = ({ isOpen, closeModal }) => {
 
         {/* Form Fields */}
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+          {/* Employee No */}
           <div>
             <label htmlFor="employee_no" className="text-[#00597a] text-sm font-normal">
               Employee No
             </label>
             <input
               id="employee_no"
-              name="employee_no"   // The name field must match the name in the state
+              name="employee_no"
               className="w-full h-10 p-2.5 mt-1 rounded-[10px] border border-[#00597a] outline-none focus:border-[#00597a] transition duration-200"
               type="text"
               placeholder="Enter Employee No"
-              value={formData.employee_no}  // Set initial value from state
-              onChange={handleInputChange}  // Handle input changes
+              value={formData.employee_no}
+              onChange={handleInputChange}
             />
           </div>
 
+          {/* First Name */}
           <div>
             <label htmlFor="first_name" className="text-[#00597a] text-sm font-normal">
               First Name
@@ -117,6 +146,7 @@ const CreateEmployeeModal = ({ isOpen, closeModal }) => {
             />
           </div>
 
+          {/* Middle Name */}
           <div>
             <label htmlFor="middle_name" className="text-[#00597a] text-sm font-normal">
               Middle Name
@@ -132,6 +162,7 @@ const CreateEmployeeModal = ({ isOpen, closeModal }) => {
             />
           </div>
 
+          {/* Last Name */}
           <div>
             <label htmlFor="last_name" className="text-[#00597a] text-sm font-normal">
               Last Name
@@ -147,6 +178,7 @@ const CreateEmployeeModal = ({ isOpen, closeModal }) => {
             />
           </div>
 
+          {/* Email Address */}
           <div>
             <label htmlFor="email_address" className="text-[#00597a] text-sm font-normal">
               Email Address
@@ -162,21 +194,7 @@ const CreateEmployeeModal = ({ isOpen, closeModal }) => {
             />
           </div>
 
-          <div>
-            <label htmlFor="designation" className="text-[#00597a] text-sm font-normal">
-              Designation
-            </label>
-            <input
-              id="designation"
-              name="designation"
-              className="w-full h-10 p-2.5 mt-1 rounded-[10px] border border-[#00597a] outline-none focus:border-[#00597a] transition duration-200"
-              type="text"
-              placeholder="Enter Designation"
-              value={formData.designation}
-              onChange={handleInputChange}
-            />
-          </div>
-
+          {/* Office Dropdown */}
           <div>
             <label htmlFor="office_id" className="text-[#00597a] text-sm font-normal">
               Office
@@ -189,11 +207,15 @@ const CreateEmployeeModal = ({ isOpen, closeModal }) => {
               onChange={handleInputChange}
             >
               <option value="">Select Office</option>
-              <option value="1">DIO</option>
-              <option value="2">RMO</option>
+              {offices.map((office) => (
+                <option key={office.id} value={office.id}>
+                  {office.office_name}
+                </option>
+              ))}
             </select>
           </div>
 
+          {/* Employment Type Dropdown */}
           <div>
             <label htmlFor="employment_type_id" className="text-[#00597a] text-sm font-normal">
               Employment Type
@@ -206,11 +228,15 @@ const CreateEmployeeModal = ({ isOpen, closeModal }) => {
               onChange={handleInputChange}
             >
               <option value="">Select Employment Type</option>
-              <option value="1">ACADEMIC</option>
-              <option value="1">NON-ACADEMIC</option>
+              {employmentTypes.map((type) => (
+                <option key={type.id} value={type.id}>
+                  {type.employment_type}
+                </option>
+              ))}
             </select>
           </div>
 
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full h-11 mt-6 bg-[#00597a] rounded-[10px] text-white text-base font-medium hover:bg-[#004a5d] transition duration-200"

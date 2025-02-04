@@ -29,7 +29,7 @@ const UserPerformance = () => {
 
     fetchIpcrData();
   }, []);
-
+  
   // Render loading state
   if (loading) {
     return (
